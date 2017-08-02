@@ -7,14 +7,14 @@ use Abraham\TwitterOAuth\TwitterOAuth;
 
 class Twitter {
 
-    private $buyer;
     private $connection;
+    private $buyer;
 
-    public function __construct() {
+    public function __construct($buyer) {
 
         $this->connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET);
 
-        $this->buyer = 'りゅう';
+        $this->buyer = $buyer;
     }
 
     public function tweet() {
