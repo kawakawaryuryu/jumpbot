@@ -19,12 +19,13 @@ class Twitter {
 
     public function tweet() {
     
-        $content = $this->connection->post('statuses/update', ['status' => $this->tweetMessage()]);
-
+        $statues = $this->connection->post('statuses/update', ['status' => $this->tweetMessage()]);
+        var_dump($statues);
     }
 
-    private function tweetMessage() {
-        return "今週はジャンプは $this->buyer です";
+    public function tweetMessage() {
+        $date = date('Y/m/d D H:i:s');
+        return "$date\n 今週のジャンプは $this->buyer です";
     }
 
 }
