@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('Asia/Tokyo');
 
 require './Twitter.php';
 require './File.php';
