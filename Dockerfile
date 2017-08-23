@@ -9,7 +9,7 @@ RUN rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
 RUN yum install -y git
 
 # cron install
-RUN yum install -y cronie-noanacron
+RUN yum install -y crontabs
 
 # php install
 RUN yum install -y --enablerepo=remi-php71 php
@@ -30,8 +30,10 @@ ADD . /app
 # composer install
 RUN composer install
 
-# copy cron file
-COPY jump-cron /etc/cron.d/
+# add cron setting to /etc/ctontab
+RUN cat jump-cron >> /etc/crontab
+
+RUN chmod 644 /etc/crontab
 
 # cron setting
 #RUN systemctl restart crond
