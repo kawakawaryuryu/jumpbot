@@ -1,8 +1,8 @@
 <?php
 date_default_timezone_set('Asia/Tokyo');
 
-require './Twitter.php';
-require './File.php';
+require dirname(__FILE__) . '/Twitter.php';
+require dirname(__FILE__) . '/File.php';
 
 $jumpBuyers = [
     0 => 'りゅう',

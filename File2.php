@@ -5,7 +5,7 @@ class File {
     private $fp;
 
     public function __construct() {
-        $filename = './buyer.txt';
+        $filename = dirname(__FILE__) . '/buyer.txt';
 
         if (!file_exists($filename)) {
             // ファイルが存在しない場合ははるぴーを入れる
