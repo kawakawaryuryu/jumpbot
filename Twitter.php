@@ -20,7 +20,7 @@ class Twitter {
     public function tweet() {
     
         $statues = $this->connection->post('statuses/update', ['status' => $this->tweetMessage()]);
-        var_dump($statues);
+        //var_dump($statues);
     }
 
     public function tweetMessage() {

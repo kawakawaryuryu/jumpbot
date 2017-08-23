@@ -11,7 +11,7 @@ $jumpBuyers = [
 // get last jump buyer
 $file = new File();
 $buyer = $file->getLastBuyer();
-var_dump($buyer);
+//var_dump($buyer);
 
 // tweet jump buyer on this week
 $tw = new Twitter($buyer);
@@ -19,7 +19,7 @@ $tw->tweet();
 var_dump($tw->tweetMessage());
 
 // update jump buyer
-var_dump(nextJumpBuyer($buyer, $jumpBuyers));
+//var_dump(nextJumpBuyer($buyer, $jumpBuyers));
 $file = new File();
 $file->updateLastBuyer(nextJumpBuyer($buyer, $jumpBuyers));
 
