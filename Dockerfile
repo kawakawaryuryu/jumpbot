@@ -31,9 +31,9 @@ ADD . /app
 RUN composer install
 
 # add cron setting to /etc/ctontab
-RUN cat jump-cron >> /etc/crontab
+COPY jump-cron /etc/cron.d/
 
-RUN chmod 644 /etc/crontab
+RUN chmod 644 /etc/cron.d/jump-cron
 
 # cron setting
 #RUN systemctl restart crond
