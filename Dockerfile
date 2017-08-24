@@ -9,7 +9,7 @@ RUN rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
 RUN yum install -y git
 
 # cron install
-RUN yum install -y crontabs
+RUN yum install -y cronie-noanacron
 
 # php install
 RUN yum install -y --enablerepo=remi-php71 php
