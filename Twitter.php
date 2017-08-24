@@ -24,7 +24,7 @@ class Twitter {
     }
 
     public function tweetMessage() {
-        $date = date('Y/m/d D H:i:s');
+        $date = date('Y/m/d D H:i');
         return "$date\n 今週のジャンプは $this->buyer です";
     }
 
