@@ -19,3 +19,19 @@ $ vim config.php
 $ vim make_json.php
 $ php make_json.php
 ```
+
+# Docker
+## docker build
+```
+$ docker build -t jumpbot .
+```
+
+## docker run
+```
+docker run -d --name jump jumpbot
+```
+
+## docker exec interactively by bash
+```
+$ docker exec -it jump bash
+```
