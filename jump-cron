@@ -1,1 +1,1 @@
-*   *   *   *   *   root    php /app/main.php >> /var/log/jumpcron.log 2>&1
+0   12   *   *   1   root    php /app/main.php >> /var/log/jumpcron.log 2>&1
