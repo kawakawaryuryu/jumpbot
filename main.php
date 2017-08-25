@@ -4,14 +4,17 @@ date_default_timezone_set('Asia/Tokyo');
 require dirname(__FILE__) . '/Twitter.php';
 require dirname(__FILE__) . '/File.php';
 
-$jumpBuyers = [
-    0 => 'りゅう',
-    1 => 'はるぴー'
-];
-// get last jump buyer
 $file = new File();
-$buyer = $file->getLastBuyer();
-//var_dump($buyer);
+
+// get all buyers
+$buyers = $file->buyers();
+//$file->updateBuyer(0, 1);
+
+// get this week jump buyer
+$buyerInfo = $file->buyerInfo();
+$buyerId = $buyerInfo['nextBuyer'];
+$buyer = $buyers[$buyerId]['buyer'];
+//var_dump($nextBuyer);
 
 // tweet jump buyer on this week
 $tw = new Twitter($buyer);
@@ -19,12 +22,8 @@ $tw->tweet();
 var_dump($tw->tweetMessage());
 
 // update jump buyer
-//var_dump(nextJumpBuyer($buyer, $jumpBuyers));
-$file = new File();
-$file->updateLastBuyer(nextJumpBuyer($buyer, $jumpBuyers));
+$file->updateBuyer($buyerId, nextBuyerId($buyerId, $buyers));
 
-function nextJumpBuyer($buyer, $allBuyers) {
-    $key = array_search($buyer, $allBuyers);
-    return $allBuyers[($key + 1) % count($allBuyers)];
+function nextBuyerId($buyerId, $allBuyers) {
+    return ($buyerId + 1) % count($allBuyers);
 }
-
