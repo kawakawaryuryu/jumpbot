@@ -9,7 +9,7 @@ class File {
     private $buyerInfo;
 
     public function __construct() {
-        $filePath = dirname(__FILE__) . '/data';
+        $filePath = dirname(__FILE__) . '/../data';
         $this->buyersFile = $filePath . '/buyers.json';
         $this->buyerFile = $filePath . '/buyer.json';
 
