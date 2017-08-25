@@ -1,7 +1,7 @@
 <?php
 
-require dirname(__FILE__) . "/vendor/autoload.php";
-require dirname(__FILE__) . "/config/config.php";
+require dirname(__FILE__) . "/../vendor/autoload.php";
+require dirname(__FILE__) . "/../config/config.php";
 
 use Abraham\TwitterOAuth\TwitterOAuth;
 
