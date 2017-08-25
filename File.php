@@ -5,6 +5,9 @@ class File {
     private $buyersFile;
     private $buyerFile;
 
+    private $buyers;
+    private $buyerInfo;
+
     public function __construct() {
         $filePath = dirname(__FILE__) . '/data';
         $this->buyersFile = $filePath . '/buyers.json';
@@ -17,13 +20,19 @@ class File {
     }
 
     public function buyers() {
-        $buyers = json_decode(file_get_contents($this->buyersFile), TRUE);
-        return $buyers;
+        $this->buyers = json_decode(file_get_contents($this->buyersFile), TRUE);
+        return $this->buyers;
     }
 
     public function buyerInfo() {
-        $buyer = json_decode(file_get_contents($this->buyerFile), TRUE);
-        return $buyer;
+        $this->buyerInfo = json_decode(file_get_contents($this->buyerFile), TRUE);
+        return $this->buyerInfo;
+    }
+
+    public function updateBuyer(int $lastBuyer, int $nextBuyer) {
+        $buyerInfo['lastBuyer'] = $lastBuyer;
+        $buyerInfo['nextBuyer'] = $nextBuyer;
+        file_put_contents($this->buyerFile, json_encode($buyerInfo, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
     }
 
 }
