@@ -35,3 +35,12 @@ docker run -d --name jump jumpbot
 ```
 $ docker exec -it jump bash
 ```
+
+# Docker Compose
+## docker-compose up
+```
+$ docker-compose up -d
+
+# need to rebuild
+$ docker-compose up -d --build
+```
