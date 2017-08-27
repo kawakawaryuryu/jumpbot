@@ -1,5 +1,5 @@
 version: "3"
 services:
   jumpbot:
-    build: .
-    container_name: jump
+    build: ./twitter_bot
+    container_name: jumpbot
