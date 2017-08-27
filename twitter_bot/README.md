@@ -1,6 +1,3 @@
-# jumpbot
-twitter bot to tweet jump buyer
-
 # Preparation
 ## configure parameters (CONSUMER_KEY, CONSUMER_SECRET etc)
 ```
