@@ -3,3 +3,5 @@ services:
   jumpbot:
     build: ./twitter_bot
     container_name: jumpbot
+    environment:
+      TZ: Asia/Tokyo
