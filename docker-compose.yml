@@ -15,4 +15,4 @@ services:
       - ./db/conf/:/etc/mysql/conf.d
       - ./db/data/:/var/lib/mysql
     env_file:
-      - ./db.env
+      - ./db/db.env
