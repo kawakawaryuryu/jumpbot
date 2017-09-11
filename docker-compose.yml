@@ -5,3 +5,14 @@ services:
     container_name: jumpbot
     environment:
       TZ: Asia/Tokyo
+  db:
+    container_name: jumpdb
+    image: mysql:latest
+    ports:
+      - 33060:3306
+    volumes:
+      - ./db/init/:/docker-entrypoint-initdb.d
+      - ./db/conf/:/etc/mysql/conf.d
+      - ./db/data/:/var/lib/mysql
+    env_file:
+      - ./db/db.env
