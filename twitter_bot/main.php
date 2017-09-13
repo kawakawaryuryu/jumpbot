@@ -6,9 +6,6 @@ use TwitterBot\file\File;
 
 date_default_timezone_set('Asia/Tokyo');
 
-//require dirname(__FILE__) . '/twitter/Twitter.php';
-//require dirname(__FILE__) . '/file/File.php';
-
 $file = new File();
 
 // get all buyers
