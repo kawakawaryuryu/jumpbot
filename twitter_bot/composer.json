@@ -3,5 +3,10 @@
     "type": "project",
     "require": {
         "abraham/twitteroauth": "^0.7.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "TwitterBot\\": "./"
+        }
     }
 }

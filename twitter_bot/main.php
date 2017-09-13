@@ -1,8 +1,10 @@
 <?php
-date_default_timezone_set('Asia/Tokyo');
+require dirname(__FILE__) . "/vendor/autoload.php";
 
-require dirname(__FILE__) . '/twitter/Twitter.php';
-require dirname(__FILE__) . '/file/File.php';
+use TwitterBot\twitter\Twitter;
+use TwitterBot\file\File;
+
+date_default_timezone_set('Asia/Tokyo');
 
 $file = new File();
 

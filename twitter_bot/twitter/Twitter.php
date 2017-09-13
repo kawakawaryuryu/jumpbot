@@ -1,9 +1,9 @@
 <?php
-
-require dirname(__FILE__) . "/../vendor/autoload.php";
-require dirname(__FILE__) . "/../config/config.php";
+namespace TwitterBot\twitter;
 
 use Abraham\TwitterOAuth\TwitterOAuth;
+
+require_once dirname(__FILE__) . '/../config/config.php';
 
 class Twitter {
 

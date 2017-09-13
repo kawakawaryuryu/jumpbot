@@ -1,5 +1,7 @@
 <?php
 
+namespace TwitterBot\file;
+
 class File {
 
     private $fp;
