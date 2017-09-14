@@ -2,7 +2,7 @@
 require dirname(__FILE__) . "/vendor/autoload.php";
 
 use TwitterBot\twitter\Twitter;
-use TwitterBot\file\File;
+use TwitterBot\models\File;
 
 date_default_timezone_set('Asia/Tokyo');
 
