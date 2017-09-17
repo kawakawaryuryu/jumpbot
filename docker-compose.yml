@@ -5,6 +5,8 @@ services:
     container_name: jumpbot
     environment:
       TZ: Asia/Tokyo
+    env_file:
+      - ./db/db.env
   db:
     container_name: jumpdb
     image: mysql:latest
