@@ -1,0 +1,41 @@
+buyers:
+  -
+    id:
+    name: "user"
+  -
+    id:
+    name: "admin"
+
+jumps:
+  -
+    id:
+    release_day: "2017-09-11"
+    price: 250
+    combined_issue: 0
+  -
+    id:
+    release_day: "2017-09-16"
+    price: 260
+    combined_issue: 0
+  -
+    id:
+    release_day: "2017-09-25"
+    price: 250
+    combined_issue: 1
+
+buyer_jump:
+  -
+    id:
+    buyer_id: 1
+    jump_id: 1
+    bought: 1
+  -
+    id:
+    buyer_id: 2
+    jump_id: 2
+    bought: 1
+  -
+    id:
+    buyer_id: 1
+    jump_id: 3
+    bought: 0

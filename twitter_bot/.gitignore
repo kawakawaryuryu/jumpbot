@@ -3,3 +3,5 @@ config.php
 *.swp
 data/*
 !data/.gitkeep
+
+tests/phpunit.xml
