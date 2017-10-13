@@ -33,7 +33,8 @@ class BuyerJumpTest extends TestCase {
     public function testSelectNextBuyersJumps() {
 
         $buyerJump = new BuyerJump(self::$pdo);
-        $actual = $buyerJump->selectNextBuyersJumps('');
+        $nextReleaseDay = '2017-09-11';
+        $actual = $buyerJump->selectNextBuyersJumps($nextReleaseDay);
 
         $expected = $this->getExpectedResults();
 
@@ -55,24 +56,6 @@ class BuyerJumpTest extends TestCase {
                 'release_day' => '2017-09-11',
                 'price' => 250,
                 'combined_issue' => 0
-            ],
-            [
-                'name' => 'admin',
-                'buyer_id' => 2,
-                'jump_id' => 2,
-                'bought' => 1,
-                'release_day' => '2017-09-16',
-                'price' => 260,
-                'combined_issue' => 0
-            ],
-            [
-                'name' => 'user',
-                'buyer_id' => 1,
-                'jump_id' => 3,
-                'bought' => 0,
-                'release_day' => '2017-09-25',
-                'price' => 250,
-                'combined_issue' => 1
             ]
         ];
 
