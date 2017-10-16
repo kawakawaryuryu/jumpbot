@@ -3,6 +3,8 @@
 // このファイルをコピーして使用する
 // cp ConfigTemplate.php Config.php
 
+namespace TwitterBot\config;
+
 class Config {
 
     const CONSUMER_KEY = 'xxxxxxxxxxx';
