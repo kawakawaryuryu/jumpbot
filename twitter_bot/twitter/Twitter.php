@@ -4,8 +4,6 @@ namespace TwitterBot\twitter;
 use Abraham\TwitterOAuth\TwitterOAuth;
 use TwitterBot\config\Config;
 
-//require_once dirname(__FILE__) . '/../config/config.php';
-
 class Twitter {
 
     private $connection;
