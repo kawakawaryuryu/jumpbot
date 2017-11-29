@@ -3,8 +3,7 @@
 namespace TwitterBot\models;
 
 use PDO;
-
-require_once dirname(__FILE__) . '/../config/db.php';
+use TwitterBot\config\DBConfig;
 
 class DBConnection {
 
@@ -16,9 +15,9 @@ class DBConnection {
             $this->db = $pdo;
         } else {
             if (empty($dsn) || empty($user) || empty($pass)) {
-                $dsn = 'mysql:host='.HOST.';dbname='.DATABASE.';port='.PORT;
-                $user = USER;
-                $pass = PASS;
+                $dsn = 'mysql:host='.DBConfig::getHost().';dbname='.DBConfig::getDatabase().';port='.DBConfig::getPort();
+                $user = DBConfig::getUser();
+                $pass = DBConfig::getPass();
             }
             $this->db = new PDO($dsn, $user, $pass);
         }
