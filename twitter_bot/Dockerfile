@@ -11,6 +11,9 @@ RUN yum install -y git
 # cron install
 RUN yum install -y cronie-noanacron
 
+# unzip
+RUN yum install -y unzip
+
 # php install
 RUN yum install -y --enablerepo=remi-php71 php php-xml php-mbstring php-pdo php-mysqlnd
 
