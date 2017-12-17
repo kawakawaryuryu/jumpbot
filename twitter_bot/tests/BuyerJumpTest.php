@@ -62,8 +62,20 @@ class BuyerJumpTest extends TestCase {
 
         $expected = $this->getExpectedResults();
 
-        // check record count
-        $this->assertEquals(count($expected), count($actual));
+        // check records
+        $this->assertArraySubset($expected, $actual);
+
+    }
+
+    public function testSelectLastBuyersJumps() {
+        // initialize table
+        $this->initializeInitData();
+
+        $buyerJump = new BuyerJump(self::$pdo);
+        $day = '2017-09-14';
+        $actual = $buyerJump->selectLastBuyersJumps($day);
+
+        $expected = $this->getExpectedResults();
 
         // check records
         $this->assertArraySubset($expected, $actual);
@@ -95,15 +107,13 @@ class BuyerJumpTest extends TestCase {
 
     private function getExpectedResults(): array {
         $expected = [
-            [
-                'name' => 'user',
-                'buyer_id' => 1,
-                'jump_id' => 1,
-                'bought' => 1,
-                'release_day' => '2017-09-11',
-                'price' => 250,
-                'combined_issue' => 0
-            ]
+            'name' => 'user',
+            'buyer_id' => 1,
+            'jump_id' => 1,
+            'bought' => 1,
+            'release_day' => '2017-09-11',
+            'price' => 250,
+            'combined_issue' => 0
         ];
 
         return $expected;

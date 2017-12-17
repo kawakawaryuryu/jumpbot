@@ -8,7 +8,7 @@ class BuyerJump extends DBConnection {
 
     const TABLE = 'buyer_jump';
 
-    public function selectNextBuyersJumps($nextReleaseDay) {
+    public function selectNextBuyersJumps($nextReleaseDay): array {
         $sql = 'select * from '. Buyers::TABLE
              . ' inner join '. BuyerJump::TABLE .' on '. Buyers::TABLE .'.id = '. BuyerJump::TABLE .'.buyer_id'
              . ' inner join '. Jumps::TABLE .' on '. BuyerJump::TABLE .'.jump_id = '. Jumps::TABLE .'.id'
@@ -17,9 +17,28 @@ class BuyerJump extends DBConnection {
         $sth = $this->db->prepare($sql);
         $sth->execute([$nextReleaseDay]);
 
-        $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+        $results = $sth->fetchAll(PDO::FETCH_ASSOC);
 
-        return $result;
+        return empty($results) ? array() : $results[0];
+    }
+
+    public function selectLastBuyersJumps(string $day = null): array {
+        if(is_null($day)) {
+            // today
+            $day = date('Y-m-d');
+        }
+        $sql = 'select * from '. Buyers::TABLE
+            . ' inner join '. BuyerJump::TABLE .' on '. Buyers::TABLE .'.id = '. BuyerJump::TABLE .'.buyer_id'
+            . ' inner join '. Jumps::TABLE .' on '. BuyerJump::TABLE .'.jump_id = '. Jumps::TABLE .'.id'
+            . ' where release_day < ?'
+            . ' order by release_day desc limit 1';
+
+        $sth = $this->db->prepare($sql);
+        $sth->execute([$day]);
+
+        $results = $sth->fetchAll(PDO::FETCH_ASSOC);
+
+        return empty($results) ? array() : $results[0];
     }
 
     public function insert(int $buyerId, int $jumpId, bool $bought) {
