@@ -67,6 +67,19 @@ class BuyerJumpTest extends TestCase {
 
     }
 
+    public function testSelectNextBuyersJumps_noRecords() {
+        // initialize table
+        $this->initializeInitData();
+
+        $buyerJump = new BuyerJump(self::$pdo);
+        $nextReleaseDay = '2017-09-10';
+        $actual = $buyerJump->selectNextBuyersJumps($nextReleaseDay);
+
+        // check record count
+        $this->assertEquals(0, count($actual));
+
+    }
+
     public function testSelectLastBuyersJumps() {
         // initialize table
         $this->initializeInitData();
@@ -79,6 +92,19 @@ class BuyerJumpTest extends TestCase {
 
         // check records
         $this->assertArraySubset($expected, $actual);
+
+    }
+
+    public function testSelectLastBuyersJumps_noRecords() {
+        // initialize table
+        $this->initializeInitData();
+
+        $buyerJump = new BuyerJump(self::$pdo);
+        $day = '2017-09-10';
+        $actual = $buyerJump->selectLastBuyersJumps($day);
+
+        // check record count
+        $this->assertEquals(0, count($actual));
 
     }
 
