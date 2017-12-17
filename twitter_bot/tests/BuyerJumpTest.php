@@ -42,7 +42,7 @@ class BuyerJumpTest extends TestCase {
     }
 
     /**
-     * empty data for insert
+     * init data for insert
      */
     private function initializeMinimumData() {
         $dataSet = new YamlDataSet(dirname(__FILE__) . '/files/buyer_jump.yml');

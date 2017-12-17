@@ -4,10 +4,10 @@ namespace TwitterBot\models;
 
 class Jumps extends DBConnection {
 
-    private static $table = 'jumps';
+    const TABLE = 'jumps';
 
     public function insert(string $releaseDay, int $price, bool $combinedIssue) {
-        $sql = 'insert into '. self::$table .'(release_day, price, combined_issue) values(:release_day, :price, :combined_issue)';
+        $sql = 'insert into '. Jumps::TABLE .'(release_day, price, combined_issue) values(:release_day, :price, :combined_issue)';
 
         $sth = $this->db->prepare($sql);
         $sth->bindParam(':release_day', $releaseDay);
