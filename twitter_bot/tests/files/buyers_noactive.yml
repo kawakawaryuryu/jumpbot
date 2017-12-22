@@ -1,0 +1,10 @@
+buyers:
+  - id: 1
+    name: "user"
+    deleted_at: "2017-12-23"
+  - id: 2
+    name: "admin"
+    deleted_at: "2017-12-24"
+  - id: 3
+    name: "mike"
+    deleted_at: "2017-12-17"
