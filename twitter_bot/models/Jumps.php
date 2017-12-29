@@ -2,6 +2,8 @@
 
 namespace TwitterBot\models;
 
+use PDO;
+
 class Jumps extends DBConnection {
 
     const TABLE = 'jumps';
@@ -16,5 +18,21 @@ class Jumps extends DBConnection {
         $sth->bindParam(':combined_issue', $combinedIssueParam);
 
         $sth->execute();
+    }
+
+    public function selectNextJump(String $day = null): array {
+        if(is_null($day)) {
+            $day = date('Y-m-d');
+        }
+        $sql = 'select * from ' . Jumps::TABLE
+            . ' where release_day >= ?'
+            . ' order by release_day limit 1';
+
+        $sth = $this->db->prepare($sql);
+        $sth->execute([$day]);
+
+        $results = $sth->fetchAll(PDO::FETCH_ASSOC);
+
+        return empty($results) ? array() : $results[0];
     }
 }
