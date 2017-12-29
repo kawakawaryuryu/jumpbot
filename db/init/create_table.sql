@@ -6,7 +6,7 @@ CREATE TABLE buyers(
     name varchar(31),
     created_at timestamp not null default current_timestamp,
     updated_at timestamp not null default current_timestamp on update current_timestamp,
-    deleted_at timestamp null
+    deleted_at timestamp null default null
 ) ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS jumps;

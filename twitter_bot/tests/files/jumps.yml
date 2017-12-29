@@ -1,0 +1,10 @@
+jumps:
+  - release_day: "2017-12-12"
+    price: 260
+    combined_issue: 0
+  - release_day: "2017-12-19"
+    price: 250
+    combined_issue: 0
+  - release_day: "2017-12-26"
+    price: 260
+    combined_issue: 1

@@ -2,8 +2,7 @@
 namespace TwitterBot\twitter;
 
 use Abraham\TwitterOAuth\TwitterOAuth;
-
-require_once dirname(__FILE__) . '/../config/config.php';
+use TwitterBot\config\Config;
 
 class Twitter {
 
@@ -12,7 +11,7 @@ class Twitter {
 
     public function __construct($buyer) {
 
-        $this->connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET);
+        $this->connection = new TwitterOAuth(Config::CONSUMER_KEY, Config::CONSUMER_SECRET, Config::ACCESS_TOKEN, Config::ACCESS_TOKEN_SECRET);
 
         $this->buyer = $buyer;
     }

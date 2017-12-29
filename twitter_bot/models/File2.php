@@ -1,6 +1,6 @@
 <?php
 
-namespace TwitterBot\file;
+namespace TwitterBot\models;
 
 class File {
 
