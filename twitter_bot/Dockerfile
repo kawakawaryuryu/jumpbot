@@ -28,7 +28,7 @@ WORKDIR /app
 COPY composer.json /app
 COPY composer.lock /app
 ENV COMPOSER_ALLOW_SUPERUSER 1
-RUN composer install --no-scripts --no-autoloader
+RUN composer install --no-scripts
 
 # copy files to /app directory
 COPY . /app
