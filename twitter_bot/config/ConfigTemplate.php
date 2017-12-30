@@ -2,10 +2,11 @@
 
 // このファイルをコピーして使用する
 // cp ConfigTemplate.php Config.php
+// and rename ConfigTemplate class to Config class
 
 namespace TwitterBot\config;
 
-class Config {
+class ConfigTemplate {
 
     const CONSUMER_KEY = 'xxxxxxxxxxx';
     const CONSUMER_SECRET = 'xxxxxxxxxxx';
