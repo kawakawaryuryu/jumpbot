@@ -24,11 +24,14 @@ RUN mv composer.phar /usr/local/bin/composer
 # change working directory for ADD instruction
 WORKDIR /app
 
-# copy files to /app directory
-ADD . /app
+# composer install previously(for using cache)
+COPY composer.json /app
+COPY composer.lock /app
+ENV COMPOSER_ALLOW_SUPERUSER 1
+RUN composer install --no-scripts --no-autoloader
 
-# composer install
-RUN composer install
+# copy files to /app directory
+COPY . /app
 
 # add cron setting to /etc/ctontab
 COPY jump-cron /etc/cron.d/
