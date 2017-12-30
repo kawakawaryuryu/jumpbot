@@ -8,14 +8,18 @@ class BuyerJump extends DBConnection {
 
     const TABLE = 'buyer_jump';
 
-    public function selectNextBuyersJumps($nextReleaseDay): array {
+    public function selectNextBuyersJumps(String $day = null): array {
+        if (is_null($day)) {
+            // today
+            $day = date('Y-m-d');
+        }
         $sql = 'select * from '. Buyers::TABLE
              . ' inner join '. BuyerJump::TABLE .' on '. Buyers::TABLE .'.id = '. BuyerJump::TABLE .'.buyer_id'
              . ' inner join '. Jumps::TABLE .' on '. BuyerJump::TABLE .'.jump_id = '. Jumps::TABLE .'.id'
-             . ' where '. Jumps::TABLE .'.release_day = ?';
+             . ' where '. Jumps::TABLE .'.release_day >= ?';
 
         $sth = $this->db->prepare($sql);
-        $sth->execute([$nextReleaseDay]);
+        $sth->execute([$day]);
 
         $results = $sth->fetchAll(PDO::FETCH_ASSOC);
 

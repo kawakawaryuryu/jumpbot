@@ -38,8 +38,8 @@ class BuyerJumpTest extends BaseTestClass {
         $this->initializeInitData();
 
         $buyerJump = new BuyerJump(self::$pdo);
-        $nextReleaseDay = '2017-09-11';
-        $actual = $buyerJump->selectNextBuyersJumps($nextReleaseDay);
+        $day = '2017-09-10';
+        $actual = $buyerJump->selectNextBuyersJumps($day);
 
         $expected = $this->getExpectedResults();
 
@@ -53,7 +53,7 @@ class BuyerJumpTest extends BaseTestClass {
         $this->initializeInitData();
 
         $buyerJump = new BuyerJump(self::$pdo);
-        $nextReleaseDay = '2017-09-10';
+        $nextReleaseDay = '2017-09-26';
         $actual = $buyerJump->selectNextBuyersJumps($nextReleaseDay);
 
         // check record count

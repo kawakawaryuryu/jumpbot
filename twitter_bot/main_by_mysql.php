@@ -7,9 +7,7 @@ use TwitterBot\models\BuyerJump;
 date_default_timezone_set('Asia/Tokyo');
 
 $buyerJump = new BuyerJump();
-//$today = date('Y-m-d');
-$today = date('Y-m-d', mktime(0, 0, 0, 10, 23, 2017));
-$results = $buyerJump->selectNextBuyersJumps($today);
+$results = $buyerJump->selectNextBuyersJumps();
 
 if (empty($results)) {
     // no sold jump today
