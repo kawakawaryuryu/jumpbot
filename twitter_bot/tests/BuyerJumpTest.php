@@ -26,7 +26,7 @@ class BuyerJumpTest extends BaseTestClass {
      * init data for insert
      */
     private function initializeMinimumData() {
-        $dataSet = new YamlDataSet(dirname(__FILE__) . '/files/buyer_jump.yml');
+        $dataSet = new YamlDataSet(dirname(__FILE__) . '/files/buyer_jump/buyer_jump.yml');
         $this->databaseTester = null;
         $this->getDatabaseTester()->setSetUpOperation($this->getSetUpOperation());
         $this->getDatabaseTester()->setDataSet($dataSet);

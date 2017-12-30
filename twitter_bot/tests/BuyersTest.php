@@ -9,14 +9,14 @@ use Exception;
 class BuyersTest extends BaseTestClass {
 
     public function getDataSet() {
-        return new YamlDataSet(dirname(__FILE__) .'/files/buyers.yml');
+        return new YamlDataSet(dirname(__FILE__) .'/files/buyers/buyers.yml');
     }
 
     /**
      * init no active buyers data for select
      */
     private function initializeNoActiveBuyersData() {
-        $dataSet = new YamlDataSet(dirname(__FILE__) . '/files/buyers_noactive.yml');
+        $dataSet = new YamlDataSet(dirname(__FILE__) . '/files/buyers/buyers_noactive.yml');
         $this->databaseTester = null;
         $this->getDatabaseTester()->setSetUpOperation($this->getSetUpOperation());
         $this->getDatabaseTester()->setDataSet($dataSet);

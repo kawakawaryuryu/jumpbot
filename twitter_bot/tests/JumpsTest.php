@@ -15,7 +15,7 @@ class JumpsTest extends BaseTestClass {
      * init data for selecting next jump
      */
     private function initializeJumpData() {
-        $dataSet = new YamlDataSet(dirname(__FILE__) . '/files/jumps.yml');
+        $dataSet = new YamlDataSet(dirname(__FILE__) . '/files/jumps/jumps.yml');
         $this->databaseTester = null;
         $this->getDatabaseTester()->setSetUpOperation($this->getSetUpOperation());
         $this->getDatabaseTester()->setDataSet($dataSet);
@@ -36,7 +36,7 @@ class JumpsTest extends BaseTestClass {
         $this->assertEquals(1, $this->getConnection()->getRowCount("jumps"));
 
         // check record
-        $dataSet= new YamlDataSet(dirname(__FILE__).'/files/jumps_for_insert.yml');
+        $dataSet= new YamlDataSet(dirname(__FILE__).'/files/jumps/jumps_for_insert.yml');
         $expectedTable = $dataSet->getTable('jumps');
         $queryTable = $this->getConnection()->createQueryTable(
             'jumps', 'select release_day, price, combined_issue from jumps'
