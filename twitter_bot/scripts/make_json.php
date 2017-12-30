@@ -1,6 +1,6 @@
 <?php
 
-$filePath = dirname(__FILE__) . '/data';
+$filePath = dirname(__FILE__) . '/../data';
 
 // make json file about all buyers
 $buyers = [

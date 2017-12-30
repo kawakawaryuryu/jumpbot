@@ -2,29 +2,10 @@
 
 namespace TwitterBot\tests;
 
-use PDO;
-use PHPUnit\Framework\TestCase;
-use PHPUnit\DbUnit\TestCaseTrait;
 use PHPUnit\DbUnit\DataSet\YamlDataSet;
 use TwitterBot\models\BuyerJump;
 
-class BuyerJumpTest extends TestCase {
-
-    use TestCaseTrait;
-
-    private static $pdo = null;
-    private $connection = null;
-
-    public function getConnection() {
-        if ($this->connection == null) {
-            if (self::$pdo == null) {
-                self::$pdo = new PDO($GLOBALS['DB_DSN'], $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWORD']);
-            }
-            $this->connection = $this->createDefaultDBConnection(self::$pdo, $GLOBALS['DB_NAME']);
-        }
-
-        return $this->connection;
-    }
+class BuyerJumpTest extends BaseTestClass {
 
     public function getDataSet() {
         return $this->createArrayDataSet([]);
@@ -45,7 +26,7 @@ class BuyerJumpTest extends TestCase {
      * init data for insert
      */
     private function initializeMinimumData() {
-        $dataSet = new YamlDataSet(dirname(__FILE__) . '/files/buyer_jump.yml');
+        $dataSet = new YamlDataSet(dirname(__FILE__) . '/files/buyer_jump/buyer_jump.yml');
         $this->databaseTester = null;
         $this->getDatabaseTester()->setSetUpOperation($this->getSetUpOperation());
         $this->getDatabaseTester()->setDataSet($dataSet);
