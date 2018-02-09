@@ -2,16 +2,8 @@
 
 require_once dirname(__FILE__) . '/../vendor/autoload.php';
 
-use TwitterBot\models\Jumps;
-use TwitterBot\scraping\JumpScraping;
-
-// get next jump info
-$scraper = new JumpScraping();
-$releaseDay = $scraper->scrapeNextJumpReleaseDay();
-$price = $scraper->scrapeNextJumpPrice();
-$combinedIssue = false; // TODO 取得の仕方が分かったら修正
+use TwitterBot\service\NextJump;
 
 // insert a next sold jump
-$jumps = new Jumps();
-$jumps->insert($releaseDay, $price, $combinedIssue);
-var_dump('inserted next jump info');
+$nextJump = new NextJump();
+$nextJump->insertNextJump();
