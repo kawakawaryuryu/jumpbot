@@ -9,8 +9,9 @@ use TwitterBot\scripts\scraping\JumpScraping;
 $scraper = new JumpScraping();
 $releaseDay = $scraper->scrapeNextJumpReleaseDay();
 $price = $scraper->scrapeNextJumpPrice();
-$combinedIssue = true; // TODO 取得の仕方が分かったら修正
+$combinedIssue = false; // TODO 取得の仕方が分かったら修正
 
 // insert a next sold jump
 $jumps = new Jumps();
 $jumps->insert($releaseDay, $price, $combinedIssue);
+var_dump('inserted next jump info');
