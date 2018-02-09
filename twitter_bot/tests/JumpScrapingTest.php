@@ -6,7 +6,6 @@ use PHPUnit\Framework\TestCase;
 use TwitterBot\scripts\scraping\JumpScraping;
 use Goutte\Client;
 use Symfony\Component\DomCrawler\Crawler;
-use \Exception;
 
 class JumpScrapingTest extends TestCase {
 
@@ -41,7 +40,7 @@ class JumpScrapingTest extends TestCase {
      */
     public function testScrapeNextJumpReleaseDay_exception() {
         // set stub
-        $this->crawlerStub->method('text')->will($this->throwException(new Exception));
+        $this->crawlerStub->method('text')->willReturn('140月14日');
         $this->crawlerStub->method('filter')->willReturn($this->crawlerStub);
         $this->clientStub->method('request')->willReturn($this->crawlerStub);
 
