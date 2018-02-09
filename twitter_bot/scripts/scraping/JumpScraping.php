@@ -4,6 +4,7 @@ namespace TwitterBot\scripts\scraping;
 
 use Goutte\Client;
 use \DateTime;
+use \Exception;
 
 class JumpScraping {
 
