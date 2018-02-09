@@ -10,15 +10,12 @@ class JumpScraping {
 
     private $client;
 
-    public function __construct(Client $client = null) {
+    public function __construct() {
         $this->client = new Client();
     }
 
     public function setClient(Client $client) {
         $this->client = $client;
-    }
-
-    public function scrape() {
     }
 
     public function scrapeNextJumpReleaseDay(): String {
