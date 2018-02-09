@@ -10,19 +10,25 @@ use \Exception;
 
 class JumpScrapingTest extends TestCase {
 
+    private $scraper;
+    private $crawlerStub;
+    private $clientStub;
+
+    public function setUp() {
+        $this->scraper = new JumpScraping();
+        $this->crawlerStub = $this->createMock(Crawler::class);
+        $this->clientStub = $this->createMock(Client::class);
+    }
+
     public function testScrapeNextJumpReleaseDay_normal() {
         // set stub
-        $crawlerStub = $this->createMock(Crawler::class);
-        $crawlerStub->method('text')->willReturn('1月3日');
-        $crawlerStub->method('filter')->willReturn($crawlerStub);
-
-        $clientStub = $this->createMock(Client::class);
-        $clientStub->method('request')->willReturn($crawlerStub);
+        $this->crawlerStub->method('text')->willReturn('1月3日');
+        $this->crawlerStub->method('filter')->willReturn($this->crawlerStub);
+        $this->clientStub->method('request')->willReturn($this->crawlerStub);
 
         // execute
-        $scraper = new JumpScraping();
-        $scraper->setClient($clientStub);
-        $releaseDay = $scraper->scrapeNextJumpReleaseDay();
+        $this->scraper->setClient($this->clientStub);
+        $releaseDay = $this->scraper->scrapeNextJumpReleaseDay();
         echo $releaseDay;
 
         // check
@@ -35,16 +41,12 @@ class JumpScrapingTest extends TestCase {
      */
     public function testScrapeNextJumpReleaseDay_exception() {
         // set stub
-        $crawlerStub = $this->createMock(Crawler::class);
-        $crawlerStub->method('text')->will($this->throwException(new Exception));
-        $crawlerStub->method('filter')->willReturn($crawlerStub);
-
-        $clientStub = $this->createMock(Client::class);
-        $clientStub->method('request')->willReturn($crawlerStub);
+        $this->crawlerStub->method('text')->will($this->throwException(new Exception));
+        $this->crawlerStub->method('filter')->willReturn($this->crawlerStub);
+        $this->clientStub->method('request')->willReturn($this->crawlerStub);
 
         // execute
-        $scraper = new JumpScraping();
-        $scraper->setClient($clientStub);
-        $scraper->scrapeNextJumpReleaseDay();
+        $this->scraper->setClient($this->clientStub);
+        $this->scraper->scrapeNextJumpReleaseDay();
     }
 }
