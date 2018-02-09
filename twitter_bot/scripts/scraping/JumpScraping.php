@@ -31,8 +31,12 @@ class JumpScraping {
         return $releaseDay->format('Y-m-d');
     }
 
-    public function scrapeNextJumpPrice() {
+    public function scrapeNextJumpPrice(): int {
+        $crawler = $this->client->request('GET', 'http://www.shonenjump.com/j/weeklyshonenjump/next.html');
+        $text = $crawler->filter('div#contentsChild > div.mainContents p')
+            ->text();
 
+        return $this->extractPrice($text);
     }
 
     private function extractReleaseDay($text): DateTime {
@@ -56,5 +60,17 @@ class JumpScraping {
         }
 
         return $releaseDay->setDate($year, $month, $day);
+    }
+
+    private function extractPrice($text): int {
+        $pattern = '/No\.([0-9]{1,}) 定価:([0-9]{2,})円.*/';
+        $result = preg_match($pattern, $text, $matches);
+        if (!$result) {
+            throw new Exception("failed to scrape next jump price");
+        }
+
+        $price = $matches[2];
+
+        return $price;
     }
 }

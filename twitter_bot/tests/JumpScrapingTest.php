@@ -28,7 +28,6 @@ class JumpScrapingTest extends TestCase {
         // execute
         $this->scraper->setClient($this->clientStub);
         $releaseDay = $this->scraper->scrapeNextJumpReleaseDay();
-        echo $releaseDay;
 
         // check
         $pattern = '/[1-9][0-9]{3}-(1[0-2]|0[1-9])-(0[1-9]|[12][0-9]|3[01])/';
@@ -47,5 +46,33 @@ class JumpScrapingTest extends TestCase {
         // execute
         $this->scraper->setClient($this->clientStub);
         $this->scraper->scrapeNextJumpReleaseDay();
+    }
+
+    public function testScrapeNextJumpPrice_normal() {
+        // set stub
+        $this->crawlerStub->method('text')->willReturn('No.10 定価:250円★1月3日(月)発売予定★');
+        $this->crawlerStub->method('filter')->willReturn($this->crawlerStub);
+        $this->clientStub->method('request')->willReturn($this->crawlerStub);
+
+        // execute
+        $this->scraper->setClient($this->clientStub);
+        $price = $this->scraper->scrapeNextJumpPrice();
+
+        // check
+        $this->assertEquals(250, $price);
+    }
+
+    /**
+     * @expectedException Exception
+     */
+    public function testScrapeNextJumpPrice_exception() {
+        // set stub
+        $this->crawlerStub->method('text')->willReturn('No.10 ★1月3日(月)発売予定★ 定価:250円');
+        $this->crawlerStub->method('filter')->willReturn($this->crawlerStub);
+        $this->clientStub->method('request')->willReturn($this->crawlerStub);
+
+        // execute
+        $this->scraper->setClient($this->clientStub);
+        $this->scraper->scrapeNextJumpPrice();
     }
 }
