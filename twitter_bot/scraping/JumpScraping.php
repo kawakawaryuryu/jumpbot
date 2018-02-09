@@ -1,6 +1,6 @@
 <?php
 
-namespace TwitterBot\scripts\scraping;
+namespace TwitterBot\scraping;
 
 use Goutte\Client;
 use \DateTime;

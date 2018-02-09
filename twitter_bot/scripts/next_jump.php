@@ -3,7 +3,7 @@
 require_once dirname(__FILE__) . '/../vendor/autoload.php';
 
 use TwitterBot\models\Jumps;
-use TwitterBot\scripts\scraping\JumpScraping;
+use TwitterBot\scraping\JumpScraping;
 
 // get next jump info
 $scraper = new JumpScraping();

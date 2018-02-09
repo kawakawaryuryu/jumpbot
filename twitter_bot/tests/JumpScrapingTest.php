@@ -3,7 +3,7 @@
 namespace TwitterBot\tests;
 
 use PHPUnit\Framework\TestCase;
-use TwitterBot\scripts\scraping\JumpScraping;
+use TwitterBot\scraping\JumpScraping;
 use Goutte\Client;
 use Symfony\Component\DomCrawler\Crawler;
 
