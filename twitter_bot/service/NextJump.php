@@ -32,5 +32,11 @@ class Jump {
     public $releaseDay;
     public $price;
     public $combinedIssue;
+
+    public function __construct($releaseDay, $price, $combinedIssue) {
+        $this->releaseDay = $releaseDay;
+        $this->price = $price;
+        $this->combinedIssue = $combinedIssue;
+    }
 }
 

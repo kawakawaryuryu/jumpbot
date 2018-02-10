@@ -5,6 +5,7 @@ namespace TwitterBot\service;
 use TwitterBot\models\BuyerJump;
 use TwitterBot\models\Buyers;
 use TwitterBot\models\Jumps;
+use Exception;
 
 class NextJumpBuyer {
 
@@ -17,6 +18,16 @@ class NextJumpBuyer {
     private function getLastBuyerId(): int {
         // get last buyer and jump info
         $lastBuyersJumps = $this->buyerJump->selectLastBuyersJumps();
+        if (empty($lastBuyersJumps)) {
+            // get first active buyer
+            $buyers = new Buyers();
+            $activeBuyers = $buyers->selectActiveBuyers();
+
+            if (empty($activeBuyers)) {
+                throw new Exception('no active buyers');
+            }
+            return $activeBuyers[0]["id"];
+        }
         return $lastBuyersJumps["buyer_id"];
     }
 
@@ -31,7 +42,11 @@ class NextJumpBuyer {
     private function getNextJumpId(): int {
         // get next jump
         $jumps = new Jumps();
-        return $jumps->selectNextJump();
+        $nextJump =  $jumps->selectNextJump();
+
+        if (empty($nextJump)) {
+            throw new Exception('no jumps');
+        }
 
         return $nextJump["id"];
     }
