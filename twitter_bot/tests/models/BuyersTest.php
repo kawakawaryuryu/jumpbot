@@ -55,6 +55,14 @@ class BuyersTest extends BaseTestClass {
         $buyers->selectNextActiveBuyer(2);
     }
 
+    public function testSelectNextActiveBuyer_buyerIdNull() {
+        $buyers = new Buyers();
+        $actual = $buyers->selectNextActiveBuyer(null);
+
+        // check record
+        $this->assertEquals("user", $actual["name"]);
+    }
+
     /**
      * @expectedException Exception
      * @expectedExceptionMessage buyer_id is invalid

@@ -24,11 +24,16 @@ class Buyers extends DBConnection {
      * @return array
      * @throws Exception
      */
-    public function selectNextActiveBuyer(int $buyerId): array {
+    public function selectNextActiveBuyer(int $buyerId = null): array {
         $activeBuyers = $this->selectActiveBuyers();
 
         if (count($activeBuyers) == 0) {
             throw new Exception("No Active Buyers");
+        }
+
+        if (is_null($buyerId)) {
+            // return first active buyer
+            return $activeBuyers[0];
         }
 
         for ($i = 0; $i < count($activeBuyers); $i++) {
