@@ -1,6 +1,6 @@
 <?php
 
-namespace TwitterBot\tests;
+namespace TwitterBot\tests\scraping;
 
 use PHPUnit\Framework\TestCase;
 use TwitterBot\scraping\JumpScraping;

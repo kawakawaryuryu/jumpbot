@@ -1,6 +1,6 @@
 <?php
 
-namespace TwitterBot\tests;
+namespace TwitterBot\tests\models;
 
 use PHPUnit\DbUnit\TestCase;
 use PHPUnit\DbUnit\TestCaseTrait;
