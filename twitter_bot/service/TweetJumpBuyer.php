@@ -30,14 +30,14 @@ class TweetJumpBuyer {
 
         if (empty($result)) {
             // no sold jump today
-            var_dump("no sold jump today");
+            echo("no sold jump today".PHP_EOL);
 
         } else {
             $buyer = $result['name'];
 
             // tweet jump buyer on this week
             $res = $this->tw->tweet($buyer);
-            var_dump($res);
+            echo($res);
         }
     }
 }

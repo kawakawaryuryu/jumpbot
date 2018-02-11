@@ -14,7 +14,7 @@ class Twitter {
 
     public function tweet(String $buyer) {
         $statues = $this->connection->post('statuses/update', ['status' => $this->tweetMessage($buyer)]);
-        return "date: $statues->created_at ". PHP_EOL ."text: $statues->text";
+        return "message: $statues->text" .PHP_EOL;
     }
 
     private function tweetMessage(String $buyer) {
