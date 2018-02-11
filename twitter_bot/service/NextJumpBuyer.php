@@ -35,12 +35,13 @@ class NextJumpBuyer {
         // get last buyer and jump info
         $lastBuyersJumps = $this->buyerJump->selectLastBuyersJumps();
         // TODO 何を返すのが適切か
-        return empty($lastBuyersJumps) ? null : $lastBuyersJumps["buyer_id"];
+        return empty($lastBuyersJumps) ? -1 : $lastBuyersJumps["buyer_id"];
     }
 
     private function getNextBuyerId(int $lastBuyerId): int {
         // get next buyer
-        $nextBuyer = $this->buyers->selectNextActiveBuyer($lastBuyerId);
+        $nextBuyer = $lastBuyerId < 0 ? $this->buyers->selectNextActiveBuyer()
+            : $this->buyers->selectNextActiveBuyer($lastBuyerId);
         return $nextBuyer["id"];
     }
 
