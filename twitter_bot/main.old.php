@@ -19,9 +19,8 @@ $buyer = $buyers[$buyerId]['buyer'];
 //var_dump($nextBuyer);
 
 // tweet jump buyer on this week
-$tw = new Twitter($buyer);
-$tw->tweet();
-var_dump($tw->tweetMessage());
+$tw = new Twitter();
+var_dump($tw->tweet($buyer));
 
 // update jump buyer
 $file->updateBuyer($buyerId, nextBuyerId($buyerId, $buyers));
