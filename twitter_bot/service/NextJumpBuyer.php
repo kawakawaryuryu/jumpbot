@@ -10,39 +10,43 @@ use Exception;
 class NextJumpBuyer {
 
     private $buyerJump;
+    private $buyers;
+    private $jumps;
 
     public function __construct() {
         $this->buyerJump = new BuyerJump();
+        $this->buyers = new Buyers();
+        $this->jumps = new Jumps();
+    }
+
+    public function setBuyerJump(BuyerJump $buyerJump) {
+        $this->buyerJump = $buyerJump;
+    }
+
+    public function setBuyers(Buyers $buyers) {
+        $this->buyers = $buyers;
+    }
+
+    public function setJumps(Jumps $jumps) {
+        $this->jumps = $jumps;
     }
 
     private function getLastBuyerId(): int {
         // get last buyer and jump info
         $lastBuyersJumps = $this->buyerJump->selectLastBuyersJumps();
-        if (empty($lastBuyersJumps)) {
-            // get first active buyer
-            $buyers = new Buyers();
-            $activeBuyers = $buyers->selectActiveBuyers();
-
-            if (empty($activeBuyers)) {
-                throw new Exception('no active buyers');
-            }
-            return $activeBuyers[0]["id"];
-        }
-        return $lastBuyersJumps["buyer_id"];
+        // TODO 何を返すのが適切か
+        return empty($lastBuyersJumps) ? null : $lastBuyersJumps["buyer_id"];
     }
 
     private function getNextBuyerId(int $lastBuyerId): int {
         // get next buyer
-        $buyers = new Buyers();
-        $nextBuyer = $buyers->selectNextActiveBuyer($lastBuyerId);
-
+        $nextBuyer = $this->buyers->selectNextActiveBuyer($lastBuyerId);
         return $nextBuyer["id"];
     }
 
     private function getNextJumpId(): int {
         // get next jump
-        $jumps = new Jumps();
-        $nextJump =  $jumps->selectNextJump();
+        $nextJump =  $this->jumps->selectNextJump();
 
         if (empty($nextJump)) {
             throw new Exception('no jumps');
