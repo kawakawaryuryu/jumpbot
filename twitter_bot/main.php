@@ -1,31 +1,20 @@
 <?php
 require dirname(__FILE__) . "/vendor/autoload.php";
 
-use TwitterBot\twitter\Twitter;
-use TwitterBot\models\File;
+use TwitterBot\service\TweetJumpBuyer;
+use TwitterBot\service\NextJump;
+use TwitterBot\service\NextJumpBuyer;
 
-date_default_timezone_set('Asia/Tokyo');
+// tweet
+$tweetJumpBuyer = new TweetJumpBuyer();
+$tweetJumpBuyer->tweetNextJumpBuyer();
 
-$file = new File();
+// update buyer_jump(bought flag = 1)
 
-// get all buyers
-$buyers = $file->buyers();
-//$file->updateBuyer(0, 1);
+// insert next jump info
+$nextJump = new NextJump();
+$nextJump->insertNextJump();
 
-// get this week jump buyer
-$buyerInfo = $file->buyerInfo();
-$buyerId = $buyerInfo['nextBuyer'];
-$buyer = $buyers[$buyerId]['buyer'];
-//var_dump($nextBuyer);
-
-// tweet jump buyer on this week
-$tw = new Twitter($buyer);
-$tw->tweet();
-var_dump($tw->tweetMessage());
-
-// update jump buyer
-$file->updateBuyer($buyerId, nextBuyerId($buyerId, $buyers));
-
-function nextBuyerId($buyerId, $allBuyers) {
-    return ($buyerId + 1) % count($allBuyers);
-}
+// insert next buyer_jump info
+$nextJumpBuyer = new NextJumpBuyer();
+$nextJumpBuyer->insertNextBuyerJump();
