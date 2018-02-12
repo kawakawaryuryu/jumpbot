@@ -56,4 +56,30 @@ class BuyerJump extends DBConnection {
 
         $sth->execute();
     }
+
+    public function update(int $id, bool $bought) {
+        $sql = 'update ' . BuyerJump::TABLE . ' set bought = :bought'
+                . ' where id = :id';
+
+        $sth = $this->db->prepare($sql);
+        $boughtParam = (int)$bought;
+        $sth->bindParam(':bought', $boughtParam);
+        $sth->bindParam(':id', $id);
+
+        return $sth->execute();
+    }
+}
+
+class BuyerJumpEntity {
+    public $id;
+    public $buyerId;
+    public $jumpId;
+    public $bought;
+
+    public function __construct(int $id, int $buyerId, int $jumpId, bool $bought) {
+        $this->id = $id;
+        $this->buyerId = $buyerId;
+        $this->jumpId = $jumpId;
+        $this->bought = $bought;
+    }
 }

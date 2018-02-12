@@ -7,9 +7,12 @@ use TwitterBot\service\NextJumpBuyer;
 
 // tweet
 $tweetJumpBuyer = new TweetJumpBuyer();
-$tweetJumpBuyer->tweetNextJumpBuyer();
+$buyerJumpInfo = $tweetJumpBuyer->tweetNextJumpBuyer();
 
 // update buyer_jump(bought flag = 1)
+if (!empty($buyerJumpInfo)) {
+
+}
 
 // insert next jump info
 $nextJump = new NextJump();

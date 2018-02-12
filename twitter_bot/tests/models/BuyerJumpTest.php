@@ -4,6 +4,7 @@ namespace TwitterBot\tests\models;
 
 use PHPUnit\DbUnit\DataSet\YamlDataSet;
 use TwitterBot\models\BuyerJump;
+use TwitterBot\models\BuyerJumpEntity;
 
 class BuyerJumpTest extends BaseTestClass {
 
@@ -93,7 +94,7 @@ class BuyerJumpTest extends BaseTestClass {
         // initialize
         $this->initializeMinimumData();
 
-        $buyerJump = new BuyerJump();
+        $buyerJump = new BuyerJump(self::$pdo);
         $buyerId = 1;
         $jumpId = 1;
         $bought = false;
@@ -105,6 +106,25 @@ class BuyerJumpTest extends BaseTestClass {
 
         // check record
         $dataSet = $this->createArrayDataSet($this->getExpectedDataSet());
+        $expectedTable = $dataSet->getTable('buyer_jump');
+        $queryTable = $this->getConnection()->createQueryTable(
+            'buyer_jump', 'select buyer_id, jump_id, bought from buyer_jump'
+        );
+        $this->assertTablesEqual($expectedTable, $queryTable);
+    }
+
+    public function testUpdate() {
+        // initialize
+        $this->initializeInitData();
+
+        $buyerJump = new BuyerJump(self::$pdo);
+        $id = 3;
+        $bought = true;
+
+        $buyerJump->update($id, $bought);
+
+        // check
+        $dataSet = $this->createArrayDataSet($this->getExpectedDataSetUpdate());
         $expectedTable = $dataSet->getTable('buyer_jump');
         $queryTable = $this->getConnection()->createQueryTable(
             'buyer_jump', 'select buyer_id, jump_id, bought from buyer_jump'
@@ -136,6 +156,16 @@ class BuyerJumpTest extends BaseTestClass {
             ],
             'buyer_jump' => [
                 ['buyer_id' => 1, 'jump_id' => 1, 'bought' => 0]
+            ]
+        ];
+    }
+
+    private function getExpectedDataSetUpdate(): array {
+        return [
+            'buyer_jump' => [
+                ['buyer_id' => 1, 'jump_id' => 1, 'bought' => 1],
+                ['buyer_id' => 2, 'jump_id' => 2, 'bought' => 1],
+                ['buyer_id' => 1, 'jump_id' => 3, 'bought' => 1],
             ]
         ];
     }
