@@ -105,7 +105,7 @@ class BuyerJumpTest extends BaseTestClass {
         $this->assertEquals(1, $this->getConnection()->getRowCount('buyer_jump'));
 
         // check record
-        $dataSet = $this->createArrayDataSet($this->getExpectedDataSet());
+        $dataSet = $this->createArrayDataSet($this->getExpectedDataSetInsert());
         $expectedTable = $dataSet->getTable('buyer_jump');
         $queryTable = $this->getConnection()->createQueryTable(
             'buyer_jump', 'select buyer_id, jump_id, bought from buyer_jump'
@@ -146,7 +146,7 @@ class BuyerJumpTest extends BaseTestClass {
         return $expected;
     }
 
-    private function getExpectedDataSet(): array {
+    private function getExpectedDataSetInsert(): array {
         return [
             'buyers' => [
                 ['id' => 1, 'name' => 'user']
