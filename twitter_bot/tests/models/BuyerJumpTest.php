@@ -95,11 +95,9 @@ class BuyerJumpTest extends BaseTestClass {
         $this->initializeMinimumData();
 
         $buyerJump = new BuyerJump(self::$pdo);
-        $buyerId = 1;
-        $jumpId = 1;
-        $bought = false;
+        $buyerJumpEntity = new BuyerJumpEntity(-1, 1, 1, false);
 
-        $buyerJump->insert($buyerId, $jumpId, $bought);
+        $buyerJump->insert($buyerJumpEntity);
 
         // check row count
         $this->assertEquals(1, $this->getConnection()->getRowCount('buyer_jump'));
@@ -118,10 +116,9 @@ class BuyerJumpTest extends BaseTestClass {
         $this->initializeInitData();
 
         $buyerJump = new BuyerJump(self::$pdo);
-        $id = 3;
-        $bought = true;
+        $buyerJumpEntity = new BuyerJumpEntity(3, 1, 3, true);
 
-        $buyerJump->update($id, $bought);
+        $buyerJump->update($buyerJumpEntity);
 
         // check
         $dataSet = $this->createArrayDataSet($this->getExpectedDataSetUpdate());

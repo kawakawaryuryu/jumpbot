@@ -45,26 +45,26 @@ class BuyerJump extends DBConnection {
         return empty($results) ? array() : $results[0];
     }
 
-    public function insert(int $buyerId, int $jumpId, bool $bought) {
+    public function insert(BuyerJumpEntity $buyerJumpEntity) {
         $sql = 'insert into '. BuyerJump::TABLE .'(buyer_id, jump_id, bought) values(:buyer_id, :jump_id, :bought)';
 
         $sth = $this->db->prepare($sql);
-        $sth->bindParam(':buyer_id', $buyerId);
-        $sth->bindParam(':jump_id', $jumpId);
-        $boughtParam = (int)$bought;
+        $sth->bindParam(':buyer_id', $buyerJumpEntity->buyerId);
+        $sth->bindParam(':jump_id', $buyerJumpEntity->jumpId);
+        $boughtParam = (int)$buyerJumpEntity->bought;
         $sth->bindParam(':bought', $boughtParam);
 
         $sth->execute();
     }
 
-    public function update(int $id, bool $bought) {
+    public function update(BuyerJumpEntity $buyerJumpEntity) {
         $sql = 'update ' . BuyerJump::TABLE . ' set bought = :bought'
                 . ' where id = :id';
 
         $sth = $this->db->prepare($sql);
-        $boughtParam = (int)$bought;
+        $boughtParam = (int)$buyerJumpEntity->bought;
         $sth->bindParam(':bought', $boughtParam);
-        $sth->bindParam(':id', $id);
+        $sth->bindParam(':id', $buyerJumpEntity->id);
 
         return $sth->execute();
     }
