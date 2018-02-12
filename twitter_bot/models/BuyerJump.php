@@ -16,7 +16,7 @@ class BuyerJump extends DBConnection {
         $sql = 'select * from '. Buyers::TABLE
              . ' inner join '. BuyerJump::TABLE .' on '. Buyers::TABLE .'.id = '. BuyerJump::TABLE .'.buyer_id'
              . ' inner join '. Jumps::TABLE .' on '. BuyerJump::TABLE .'.jump_id = '. Jumps::TABLE .'.id'
-             . ' where '. Jumps::TABLE .'.release_day >= ?';
+             . ' where '. Jumps::TABLE .'.release_day = ?';
 
         $sth = $this->db->prepare($sql);
         $sth->execute([$day]);
