@@ -4,6 +4,7 @@ namespace TwitterBot\tests\models;
 
 use PHPUnit\DbUnit\DataSet\YamlDataSet;
 use TwitterBot\models\BuyerJump;
+use TwitterBot\models\BuyerJumpEntity;
 
 class BuyerJumpTest extends BaseTestClass {
 
@@ -93,18 +94,34 @@ class BuyerJumpTest extends BaseTestClass {
         // initialize
         $this->initializeMinimumData();
 
-        $buyerJump = new BuyerJump();
-        $buyerId = 1;
-        $jumpId = 1;
-        $bought = false;
+        $buyerJump = new BuyerJump(self::$pdo);
+        $buyerJumpEntity = new BuyerJumpEntity(-1, 1, 1, false);
 
-        $buyerJump->insert($buyerId, $jumpId, $bought);
+        $buyerJump->insert($buyerJumpEntity);
 
         // check row count
         $this->assertEquals(1, $this->getConnection()->getRowCount('buyer_jump'));
 
         // check record
-        $dataSet = $this->createArrayDataSet($this->getExpectedDataSet());
+        $dataSet = $this->createArrayDataSet($this->getExpectedDataSetInsert());
+        $expectedTable = $dataSet->getTable('buyer_jump');
+        $queryTable = $this->getConnection()->createQueryTable(
+            'buyer_jump', 'select buyer_id, jump_id, bought from buyer_jump'
+        );
+        $this->assertTablesEqual($expectedTable, $queryTable);
+    }
+
+    public function testUpdate() {
+        // initialize
+        $this->initializeInitData();
+
+        $buyerJump = new BuyerJump(self::$pdo);
+        $buyerJumpEntity = new BuyerJumpEntity(3, 1, 3, true);
+
+        $buyerJump->update($buyerJumpEntity);
+
+        // check
+        $dataSet = $this->createArrayDataSet($this->getExpectedDataSetUpdate());
         $expectedTable = $dataSet->getTable('buyer_jump');
         $queryTable = $this->getConnection()->createQueryTable(
             'buyer_jump', 'select buyer_id, jump_id, bought from buyer_jump'
@@ -126,7 +143,7 @@ class BuyerJumpTest extends BaseTestClass {
         return $expected;
     }
 
-    private function getExpectedDataSet(): array {
+    private function getExpectedDataSetInsert(): array {
         return [
             'buyers' => [
                 ['id' => 1, 'name' => 'user']
@@ -136,6 +153,16 @@ class BuyerJumpTest extends BaseTestClass {
             ],
             'buyer_jump' => [
                 ['buyer_id' => 1, 'jump_id' => 1, 'bought' => 0]
+            ]
+        ];
+    }
+
+    private function getExpectedDataSetUpdate(): array {
+        return [
+            'buyer_jump' => [
+                ['buyer_id' => 1, 'jump_id' => 1, 'bought' => 1],
+                ['buyer_id' => 2, 'jump_id' => 2, 'bought' => 1],
+                ['buyer_id' => 1, 'jump_id' => 3, 'bought' => 1],
             ]
         ];
     }

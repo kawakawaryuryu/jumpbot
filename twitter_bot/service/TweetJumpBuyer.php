@@ -23,7 +23,7 @@ class TweetJumpBuyer {
         $this->tw = $tw;
     }
 
-    public function tweetNextJumpBuyer() {
+    public function tweetNextJumpBuyer(): array {
         date_default_timezone_set('Asia/Tokyo');
 
         $result = $this->buyerJump->selectNextBuyersJumps();
@@ -39,5 +39,7 @@ class TweetJumpBuyer {
             $res = $this->tw->tweet($buyer);
             echo($res);
         }
+
+        return $result;
     }
 }

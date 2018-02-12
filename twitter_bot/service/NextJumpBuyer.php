@@ -3,6 +3,7 @@
 namespace TwitterBot\service;
 
 use TwitterBot\models\BuyerJump;
+use TwitterBot\models\BuyerJumpEntity;
 use TwitterBot\models\Buyers;
 use TwitterBot\models\Jumps;
 use Exception;
@@ -60,7 +61,8 @@ class NextJumpBuyer {
         // insert next buyer_jump data
         $nextBuyerId = $this->getNextBuyerId($this->getLastBuyerId());
         $nextJumpId = $this->getNextJumpId();
-        $this->buyerJump->insert($nextBuyerId, $nextJumpId, false);
+        $buyerJumpEntity = new BuyerJumpEntity(-1, $nextBuyerId, $nextJumpId, false);
+        $this->buyerJump->insert($buyerJumpEntity);
 
         var_dump('have inserted next buyer_jump data');
     }
