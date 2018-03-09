@@ -20,8 +20,8 @@ class JumpScraping {
 
     public function scrapeNextJumpReleaseDay(): String {
         // TODO move url parameter to config
-        $crawler = $this->client->request('GET', 'http://www.shonenjump.com/j/weeklyshonenjump/next.html');
-        $text = $crawler->filter('div#contentsChild > div.mainContents em')
+        $crawler = $this->client->request('GET', 'http://www.shonenjump.com/j/weeklyshonenjump/');
+        $text = $crawler->filter('a#nextWJ > p')
             ->text();
         $releaseDay = $this->extractReleaseDay($text);
 
@@ -29,8 +29,8 @@ class JumpScraping {
     }
 
     public function scrapeNextJumpPrice(): int {
-        $crawler = $this->client->request('GET', 'http://www.shonenjump.com/j/weeklyshonenjump/next.html');
-        $text = $crawler->filter('div#contentsChild > div.mainContents p')
+        $crawler = $this->client->request('GET', 'http://www.shonenjump.com/j/weeklyshonenjump/');
+        $text = $crawler->filter('a#nextWJ > p')
             ->text();
 
         return $this->extractPrice($text);
