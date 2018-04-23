@@ -10,6 +10,8 @@ class JumpScraping {
 
     private $client;
 
+    private $text;
+
     public function __construct() {
         $this->client = new Client();
     }
@@ -18,22 +20,27 @@ class JumpScraping {
         $this->client = $client;
     }
 
-    public function scrapeNextJumpReleaseDay(): String {
+    public function scrape(): void {
         // TODO move url parameter to config
         $crawler = $this->client->request('GET', 'http://www.shonenjump.com/j/weeklyshonenjump/');
-        $text = $crawler->filter('a#nextWJ > p')
-            ->text();
-        $releaseDay = $this->extractReleaseDay($text);
+        $this->text = $crawler->filter('a#nextWJ > p')->text();
+    }
+
+    public function scrapeNextJumpReleaseDay(): String {
+        if (is_null($this->text)) {
+            $this->scrape();
+        }
+        $releaseDay = $this->extractReleaseDay($this->text);
 
         return $releaseDay->format('Y-m-d');
     }
 
     public function scrapeNextJumpPrice(): int {
-        $crawler = $this->client->request('GET', 'http://www.shonenjump.com/j/weeklyshonenjump/');
-        $text = $crawler->filter('a#nextWJ > p')
-            ->text();
+        if (is_null($this->text)) {
+            $this->scrape();
+        }
 
-        return $this->extractPrice($text);
+        return $this->extractPrice($this->text);
     }
 
     private function extractReleaseDay($text): DateTime {
@@ -60,13 +67,13 @@ class JumpScraping {
     }
 
     private function extractPrice($text): int {
-        $pattern = '/No\.([0-9]{1,}) 定価:([0-9]{2,})円.*/';
+        $pattern = '/.*定価:([0-9]{2,})円.*/';
         $result = preg_match($pattern, $text, $matches);
         if (!$result) {
             throw new Exception("failed to scrape next jump price");
         }
 
-        $price = $matches[2];
+        $price = $matches[1];
 
         return $price;
     }

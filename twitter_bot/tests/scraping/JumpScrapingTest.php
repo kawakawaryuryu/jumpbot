@@ -61,18 +61,4 @@ class JumpScrapingTest extends TestCase {
         // check
         $this->assertEquals(250, $price);
     }
-
-    /**
-     * @expectedException Exception
-     */
-    public function testScrapeNextJumpPrice_exception() {
-        // set stub
-        $this->crawlerStub->method('text')->willReturn('No.10 ★1月3日(月)発売予定★ 定価:250円');
-        $this->crawlerStub->method('filter')->willReturn($this->crawlerStub);
-        $this->clientStub->method('request')->willReturn($this->crawlerStub);
-
-        // execute
-        $this->scraper->setClient($this->clientStub);
-        $this->scraper->scrapeNextJumpPrice();
-    }
 }
