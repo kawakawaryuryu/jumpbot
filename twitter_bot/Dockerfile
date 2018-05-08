@@ -41,5 +41,5 @@ RUN chmod 644 /etc/cron.d/jump-cron
 # cron setting
 #RUN systemctl restart crond
 
-# execute cron
-CMD crond && tail -f /dev/null
+# set env variables and execute cron
+CMD env > /etc/environment && crond && tail -f /dev/null
