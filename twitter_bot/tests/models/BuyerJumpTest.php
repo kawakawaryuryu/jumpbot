@@ -67,7 +67,7 @@ class BuyerJumpTest extends BaseTestClass {
         $this->initializeInitData();
 
         $buyerJump = new BuyerJump(self::$pdo);
-        $day = '2017-09-14';
+        $day = '2017-09-11';
         $actual = $buyerJump->selectLastBuyersJumps($day);
 
         $expected = $this->getExpectedResults();
