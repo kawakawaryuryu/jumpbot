@@ -16,5 +16,10 @@
     },
     "config": {
         "process-timeout": 600
+    },
+    "scripts": {
+        "test": [
+            "vendor/bin/phpunit tests -c tests/phpunit.xml"
+        ]
     }
 }
