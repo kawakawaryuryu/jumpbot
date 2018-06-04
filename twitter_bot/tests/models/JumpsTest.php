@@ -49,7 +49,7 @@ class JumpsTest extends BaseTestClass {
         $this->initializeJumpData();
 
         $jumps = new Jumps();
-        $day = date('Y-m-d', mktime(0, 0, 0, 12, 18, 2017));
+        $day = date('Y-m-d', mktime(0, 0, 0, 12, 12, 2017));
 
         // execute
         $actual = $jumps->selectNextJump($day);

@@ -25,7 +25,7 @@ class Jumps extends DBConnection {
             $day = date('Y-m-d');
         }
         $sql = 'select * from ' . Jumps::TABLE
-            . ' where release_day >= ?'
+            . ' where release_day > ?'
             . ' order by release_day limit 1';
 
         $sth = $this->db->prepare($sql);
